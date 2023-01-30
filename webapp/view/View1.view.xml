@@ -1,0 +1,162 @@
+<mvc:View controllerName="com.anudeep.project2.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <!-- <Panel headerText="{localModel>/Title}" headerLevel="H4" fixed="true"> -->
+            <content>
+                <VBox class="sapUiSmallMargin">
+                    <f:SimpleForm
+                        id="SimpleFormChange354"
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        title="{localModel>/Title}"
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="4"
+                        emptySpanL="4"
+                        emptySpanM="4"
+                        emptySpanS="0"
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false">
+                        <f:content>
+                            <Label text="First Name" labelFor="FN" />
+                            <Input id="FN" value="{/Details/FName}" required="true" width="400px" />
+                            <Label text="Last Name" labelFor="LN" />
+                            <Input id="LN" value="{/Details/LName}" required="false" width="400px" />
+                            <Label text="Gender" />
+                            <RadioButtonGroup id="Gend">
+                                <RadioButton text="{/Details/Gender/M}"  />
+                                <RadioButton text="{/Details/Gender/F}" />
+                            </RadioButtonGroup>
+                            <!-- <Label text="Country" />
+                            <Select id="Country" name="Country" selectedKey="Default" width="400px">
+                                <items>
+                                    <core:Item text="Select Country" key="DEF" />
+                                    <core:Item text="Australia" key="AUS" />
+                                    <core:Item text="Canada" key="CAN" />
+                                    <core:Item text="England" key="ENG" />
+                                    <core:Item text="India" key="IN" />
+                                    <core:Item text="United States" key="US" />
+                                </items>
+                            </Select> -->
+                            <Label text="Mobile Number" labelFor="PH" />
+                            <Input id="PH" value="{/Details/Phone}" width="400px" />
+                        </f:content>
+                    </f:SimpleForm>
+                    <Panel headerText="Address Details" expandable="true" headerLevel="H4" accessibleRole="Form" collapsed="true" toggle="handleToggle">
+                        <content>
+                            <VBox class="sapUiSmallMargin">
+                                <f:SimpleForm
+                                    id="SimpleFormChange355"
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    singleContainerFullSize="false">
+                                    <f:content>
+                                        <Label text="House No." labelFor="HN" />
+                                        <Input id="HN" value="{/Details/Address/HouseNo}" width="380px" />
+                                        <Label text="Street"    labelFor="ST" />
+                                        <Input id="ST" value="{/Details/Address/Street}" width="380px" />
+                                        <Label text="Street 2" labelFor="ST2" />
+                                        <Input id="ST2" value="{/Details/Address/Street2}" width="380px" />
+                                        <Label text="City" labelFor="CT" />
+                                        <Input id="CT" value="{/Details/Address/City}" width="380px" />
+                                        <Label text="Pin Code" labelFor="PC" />
+                                        <Input id="PC" value="{/Details/Address/Pin}" width="380px" />
+                                        <Label text="Country" />
+                                        <Select id="Country" name="Country" selectedKey="Default" width="400px">
+                                            <items>
+                                                <core:Item text="Select Country" key="DEF" />
+                                                <core:Item text="Australia" key="AUS" />
+                                                <core:Item text="Canada" key="CAN" />
+                                                <core:Item text="England" key="ENG" />
+                                                <core:Item text="India" key="IN" />
+                                                <core:Item text="United States" key="US" />
+                                            </items>
+                                        </Select>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </VBox>
+                        </content>
+                    </Panel>
+                    <Bar>
+                        <contentRight>
+                            <Button text="Submit" type="Accept" press=".onSubmit" />
+                            <Button text="Clear" type="Reject" press=".onCancel" />
+                        </contentRight>
+                    </Bar>
+                    <IconTabBar id="idIconTabBar" 
+                                select=".onFilterSelect" 
+                                class="sapUiResponsiveContentPadding">
+                        <items>
+                            <IconTabFilter id="ALL"
+                                           showAll="true"
+                                           text="Employees" 
+                                           key="Count" 
+                                           count="{= ${oTable>/Emp}.length}">
+                            </IconTabFilter>
+                            <IconTabSeparator />
+                            <IconTabFilter id="F"
+                                           
+				                           text="Female Employees"
+				                           key="FE" />
+                            <IconTabFilter id="M"
+                                           
+				                           text="Male Employees"
+				                           key="MA" />
+                        </items>
+                        <content>
+                            <Table items="{oTable>/Emp}" id="empTable">
+                                <columns>
+                                    <Column>
+                                        <Text text="Name" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Gender" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Country" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Mobile Number" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <Text text="{oTable>FName} {oTable>LName}" />
+                                            <Text text="{oTable>Gender}" />
+                                            <Text text="{oTable>Country}" />
+                                            <Text text="{oTable>Phone}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>                            
+                    </IconTabBar>
+                </VBox>
+            </content>
+        <!-- </Panel> -->
+        <footer>
+            <Bar>
+                <contentLeft>
+                    <Button text="Next" type="Navigation" press=".onNext" />
+                </contentLeft>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>
